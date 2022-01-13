@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:todo/addTodo.dart';
+import 'package:todo/todo.dart';
 import 'package:todo/todoList.dart';
+import 'package:intl/intl_browser.dart';
 
 class MainTodo extends StatefulWidget {
   @override
@@ -8,18 +11,42 @@ class MainTodo extends StatefulWidget {
 }
 
 class _MainTodoState extends State<MainTodo> {
-  final List<String> _todos = ["Value1", "Value2", "Value3"];
+  final List<Todo> _todos = [
+    Todo(
+        id: "12348",
+        title: "Study Data Structures and Algorithems: Grokking Algorithems",
+        date: DateTime.now(),
+        status: false),
+  ];
 
-  void _addTodo(String value) {
+  void _deleteTodo(String id) {
     setState(() {
-      _todos.add(value);
+      Todo todo = _todos.where((element) => element.id == id).first;
+      _todos.remove(todo);
+    });
+  }
+
+  void _changeStatus(bool value, String id) {
+    setState(() {
+      Todo todo = _todos.where((element) => element.id == id).first;
+      todo.status = value;
+    });
+  }
+
+  void _addTodo(Todo todo) {
+    setState(() {
+      todo.id = DateFormat().format(DateTime.now());
+      _todos.add(todo);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [TodoList(_todos), AddTodo(_addTodo)],
+      children: [
+        TodoList(_todos, _deleteTodo, _changeStatus),
+        AddTodo(_addTodo)
+      ],
     );
   }
 }

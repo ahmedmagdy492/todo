@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'todo.dart';
+
 class AddTodo extends StatefulWidget {
   final Function _addTodo;
 
@@ -23,10 +25,8 @@ class _AddTodoState extends State<AddTodo> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          border: Border.all(
-              color: Colors.black, width: 2, style: BorderStyle.solid)),
+    return Card(
+      elevation: 20,
       child: Column(
         children: [
           Padding(
@@ -43,7 +43,8 @@ class _AddTodoState extends State<AddTodo> {
                 String txt = _controller.text;
                 if (_controller.text != "") {
                   _controller.text = "";
-                  _addTodo(txt);
+                  _addTodo(
+                      Todo(title: txt, status: false, date: DateTime.now()));
                 }
               },
               child: Text("Add Todo"),
