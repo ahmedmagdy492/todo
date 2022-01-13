@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/todo.dart';
+import 'package:todo/todo_item.dart';
 
 class TodoList extends StatelessWidget {
   final List<Todo> _todos;
@@ -14,38 +15,7 @@ class TodoList extends StatelessWidget {
       child: ListView(
         children: [
           ..._todos.map(
-            (todo) => Card(
-              child: Container(
-                padding: EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    Checkbox(
-                        value: todo.status,
-                        onChanged: (val) => _changeStatus(val, todo.id)),
-                    Expanded(
-                      child: Tooltip(
-                        message: todo.title,
-                        child: Text(
-                          todo.title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              decoration: todo.status
-                                  ? TextDecoration.lineThrough
-                                  : TextDecoration.none),
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () => _deleteTodo(todo.id),
-                      icon: Icon(Icons.delete),
-                    )
-                  ],
-                ),
-              ),
-            ),
+            (todo) => TodoItem(todo, _changeStatus, _deleteTodo),
           )
         ],
       ),

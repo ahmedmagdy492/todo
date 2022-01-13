@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:todo/addTodo.dart';
 import 'package:todo/todo.dart';
 import 'package:todo/todoList.dart';
-import 'package:intl/intl_browser.dart';
 
 class MainTodo extends StatefulWidget {
   @override
