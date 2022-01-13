@@ -30,7 +30,11 @@ class TodoList extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              decoration: todo.status
+                                  ? TextDecoration.lineThrough
+                                  : TextDecoration.none),
                         ),
                       ),
                     ),
